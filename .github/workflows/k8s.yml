@@ -39,7 +39,7 @@ jobs:
         tanzu plugin install --local cli all
     - name: Set env variable and proxy
       env:
-        FIRST_NAME: 
+        FIRST_NAME: SET TKG_SYSTEM_
         middle_name: The
         Last_Name: Octocat
     - name: Login to Tanzu Cluster
@@ -69,4 +69,12 @@ jobs:
     - name: set context
       run: |
         kubectl config set-context --current --namespace=ems-sys
+        
+    - name: local HELM chart installation
+      run: |
+        helm isntall release1 tkg-sampleapp-springboot-chart-1.0.0.tgz
+        
+    - name: Updated Pod List
+      run: |
+        kubectl get pods
         
