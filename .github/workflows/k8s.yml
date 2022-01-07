@@ -47,4 +47,26 @@ jobs:
         tanzu login --endpoint
     - name: Generate Kubeconfig
       run: |
-        tanzu cluster use-context
+        tanzu cluster kubeconfig get wrkld-az2-1-tkm-system-1
+    - name: switch context
+      run: |
+        kcubectl config use-context tanzu-cli-wrkld-az2-1-tkm-system-1@wrkld-az2-1-tkm-system-1
+    - name: Get Pods running in ems-sys Namespace
+      run: |
+        kubectl get pods -n ems-sys
+    - name: Get Pods running in ems-sys Namespace
+      run: |
+        kubectl get pods -n ems-sys
+        
+    - name: Generate local package with HELM
+      run: |
+        helm package ./tgk-sampleapp-springboot-chart
+        
+    - name: switch context
+      run: |
+        kcubectl config use-context tanzu-cli-wrkld-az2-1-tkm-system-1@wrkld-az2-1-tkm-system-1
+        
+    - name: set context
+      run: |
+        kubectl config set-context --current --namespace=ems-sys
+        
